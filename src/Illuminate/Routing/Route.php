@@ -1045,6 +1045,16 @@ class Route
     }
 
     /**
+     * Add a post route to the current instance uri.
+     *
+     * @param array|string|callable|null  $action
+     * @return $this
+     */
+    public function post($action = null) {
+	    return \Illuminate\Support\Facades\Route::post($this->uri, $action);
+    }
+
+    /**
      * Dynamically access route parameters.
      *
      * @param  string  $key
