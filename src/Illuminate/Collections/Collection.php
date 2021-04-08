@@ -185,8 +185,8 @@ class Collection implements ArrayAccess, Enumerable
      */
     public function containsAll($values)
     {
-        foreach ($values as $elem) {
-            if (! $this->contains($elem)) {
+        foreach ($values as $value) {
+            if (! $this->contains($value)) {
                 return false;
             }
         }
