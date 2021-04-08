@@ -180,10 +180,10 @@ class Collection implements ArrayAccess, Enumerable
     /**
      * Determine if all items exists in the collection.
      *
-     * @param  mixed  $arr
+     * @param  mixed  $values
      * @return bool
      */
-    public function containsAll($arr)
+    public function containsAll($values)
     {
         foreach ($arr as $elem) {
             if (! $this->contains($elem)) {
