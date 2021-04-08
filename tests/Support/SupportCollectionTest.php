@@ -3055,6 +3055,13 @@ class SupportCollectionTest extends TestCase
 
         $this->assertTrue($c->containsAll([]));
         $this->assertTrue($c->containsAll(collect([])));
+
+        $c = new $collection([ [1, 3], [3, 5] ]);
+
+        $this->assertTrue($c->containsAll([[1, 3]]));
+        $this->assertTrue($c->containsAll([[3, 5]]));
+        $this->assertFalse($c->containsAll([[1, 5]]));
+        $this->assertFalse($c->containsAll([[3]]));
     }
 
     /**

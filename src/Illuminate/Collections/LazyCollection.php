@@ -207,7 +207,8 @@ class LazyCollection implements Enumerable
     /**
      * Determine if all items exists in the collection.
      *
-     * @param  mixed  $values
+     * @param mixed $values
+     * @param bool $strict
      * @return bool
      */
     public function containsAll($values, $strict = false)
