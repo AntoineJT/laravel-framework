@@ -211,12 +211,7 @@ class LazyCollection implements Enumerable
      * @return bool
      */
     public function containsAll($arr) {
-        // $this->passthru('containsAll', func_get_args());
-        foreach($arr as $elem) {
-            if (!$this->contains($elem))
-                return false;
-        }
-        return true;
+        $this->passthru('containsAll', $arr);
     }
 
     /**
