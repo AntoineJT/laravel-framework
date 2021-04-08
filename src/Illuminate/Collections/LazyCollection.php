@@ -205,6 +205,16 @@ class LazyCollection implements Enumerable
     }
 
     /**
+     * Determine if all items exists in the collection.
+     *
+     * @param  mixed  $arr
+     * @return bool
+     */
+    public function containsAll($arr) {
+        $this->passthru('containsAll', func_get_args());
+    }
+
+    /**
      * Cross join the given iterables, returning all possible permutations.
      *
      * @param  array  ...$arrays
