@@ -183,8 +183,9 @@ class Collection implements ArrayAccess, Enumerable
      */
     public function containsAll($arr) {
         foreach($arr as $elem) {
-            if (!$this->contains($elem))
+            if (! $this->contains($elem)) {
                 return false;
+            }
         }
         return true;
     }
