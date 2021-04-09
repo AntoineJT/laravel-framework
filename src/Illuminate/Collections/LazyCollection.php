@@ -215,6 +215,8 @@ class LazyCollection implements Enumerable
     {
         $values = $this->getArrayableItems($values);
 
+        if (empty($values)) return true;
+
         foreach ($this as $item) {
             $index = array_search($item, $values, $strict);
 
