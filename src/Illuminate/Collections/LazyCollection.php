@@ -231,7 +231,7 @@ class LazyCollection implements Enumerable
         }
 
         // return false;
-        return count($values) === 0;
+        return empty($values);
     }
 
     /**
