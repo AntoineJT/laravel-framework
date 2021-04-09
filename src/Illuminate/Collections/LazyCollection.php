@@ -211,6 +211,9 @@ class LazyCollection implements Enumerable
      * @param bool $strict
      * @return bool
      */
+    // TODO Mettre cette implem dans EnumeratesValues
+    // quand elle sera au point, elle sera la même pour
+    // les Collections et les LazyCollections
     public function containsAll($values, $strict = false)
     {
         $values = $this->getArrayableItems($values);
@@ -222,12 +225,13 @@ class LazyCollection implements Enumerable
 
             if ($index === false) continue;
 
-            if (count($values) === 1) return true;
+            // if (count($values) === 1) return true;
 
             array_splice($values, $index);
         }
 
-        return false;
+        // return false;
+        return count($values) === 0;
     }
 
     /**
