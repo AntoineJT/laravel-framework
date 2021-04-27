@@ -205,37 +205,6 @@ class LazyCollection implements Enumerable
     }
 
     /**
-     * Determine if all items exists in the collection.
-     *
-     * @param mixed $values
-     * @param bool $strict
-     * @return bool
-     */
-    // TODO Mettre cette implem dans EnumeratesValues
-    // quand elle sera au point, elle sera la même pour
-    // les Collections et les LazyCollections
-    public function containsAll($values, $strict = false)
-    {
-        $values = $this->getArrayableItems($values);
-
-        if (empty($values)) return true;
-
-        foreach ($this as $item) {
-            $index = array_search($item, $values, $strict);
-
-            if ($index === false) continue;
-
-            if (count($values) === 1) return true;
-
-            // $values = array_splice($values, $index);
-            unset($values[$index]);
-        }
-
-        return false;
-        // return empty($values);
-    }
-
-    /**
      * Cross join the given iterables, returning all possible permutations.
      *
      * @param  array  ...$arrays

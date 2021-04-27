@@ -178,23 +178,6 @@ class Collection implements ArrayAccess, Enumerable
     }
 
     /**
-     * Determine if all items exists in the collection.
-     *
-     * @param  mixed  $values
-     * @return bool
-     */
-    public function containsAll($values)
-    {
-        foreach ($values as $value) {
-            if (! $this->contains($value)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
      * Cross join with the given lists, returning all possible permutations.
      *
      * @param  mixed  ...$lists
