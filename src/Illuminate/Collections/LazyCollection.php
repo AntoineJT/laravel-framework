@@ -225,13 +225,14 @@ class LazyCollection implements Enumerable
 
             if ($index === false) continue;
 
-            // if (count($values) === 1) return true;
+            if (count($values) === 1) return true;
 
-            array_splice($values, $index);
+            // $values = array_splice($values, $index);
+            unset($values[$index]);
         }
 
-        // return false;
-        return empty($values);
+        return false;
+        // return empty($values);
     }
 
     /**
