@@ -306,6 +306,10 @@ class Collection extends BaseCollection implements QueueableCollection
      */
     public function containsAll($values, $strict = false)
     {
+        if ($values == null) {
+            return true;
+        }
+
         return collect($values)->every(function ($value) use ($strict) {
             if ($value instanceof Model) {
                 return parent::contains(function ($model) use ($value) {
