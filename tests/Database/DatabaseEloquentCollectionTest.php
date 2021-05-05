@@ -47,19 +47,18 @@ class DatabaseEloquentCollectionTest extends TestCase
     }
 
     // TODO Move to the bottom
+    /*
     public function testContainsAll() {
         $c = new Collection([['id' => 1], ['id' => 3], ['id' => 5]]);
 
-        $this->assertTrue($c->containsAll(new Collection([['id' => 1], ['id' => 3]])));
-        /*
+        $this->assertTrue($c->containsAll(collect([['id' => 1], ['id' => 3]])));
         $this->assertTrue($c->containsAll([['id' => 1], ['id' => 5]]));
         $this->assertFalse($c->containsAll([['id' => 1], ['id' => 2]]));
         $this->assertFalse($c->containsAll([['id' => 1], ['id' => 3], ['id' => 5], ['id' => 7]]));
 
         $this->assertTrue($c->containsAll([['id' => 1], ['id' => '3']]));
         $this->assertFalse($c->containsAll([['id' => 1], ['id' => '3']], true));
-        */
-/*
+
         $this->assertTrue($c->containsAll(collect([1, 3])));
         $this->assertTrue($c->containsAll(collect([1, 5])));
         $this->assertFalse($c->containsAll(collect([1, 2])));
@@ -75,8 +74,8 @@ class DatabaseEloquentCollectionTest extends TestCase
         $this->assertTrue($c->containsAll([[3, 5]]));
         $this->assertFalse($c->containsAll([[1, 5]]));
         $this->assertFalse($c->containsAll([[3]]));
-*/
     }
+*/
 
     public function testContainsIndicatesIfModelInArray()
     {
@@ -94,6 +93,29 @@ class DatabaseEloquentCollectionTest extends TestCase
         $this->assertTrue($c->contains($mockModel));
         $this->assertTrue($c->contains($mockModel2));
         $this->assertFalse($c->contains($mockModel3));
+    }
+
+    // TODO Move to the bottom
+    public function testContainsAllIndicatesIfModelInArray()
+    {
+        $mockModel = m::mock(Model::class);
+        $mockModel->shouldReceive('is')->with($mockModel)->andReturn(true);
+        $mockModel->shouldReceive('is')->andReturn(false);
+        $mockModel2 = m::mock(Model::class);
+        $mockModel2->shouldReceive('is')->with($mockModel2)->andReturn(true);
+        $mockModel2->shouldReceive('is')->andReturn(false);
+        $mockModel3 = m::mock(Model::class);
+        $mockModel3->shouldReceive('is')->with($mockModel3)->andReturn(true);
+        $mockModel3->shouldReceive('is')->andReturn(false);
+        $c = new Collection([$mockModel, $mockModel2]);
+
+        $this->assertTrue($c->containsAll([$mockModel]));
+        $this->assertTrue($c->containsAll([$mockModel2]));
+
+        $this->assertTrue($c->containsAll(new Collection([$mockModel, $mockModel2])));
+        $this->assertTrue($c->containsAll([$mockModel, $mockModel2]));
+
+        $this->assertFalse($c->containsAll($mockModel3));
     }
 
     public function testContainsIndicatesIfDifferentModelInArray()
