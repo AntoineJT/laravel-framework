@@ -298,6 +298,28 @@ class Collection extends BaseCollection implements QueueableCollection
     }
 
     /**
+     * Determine if all items exists in the collection.
+     *
+     * @param  mixed  $values
+     * @param  bool  $strict
+     * @return bool
+     */
+    public function containsAll($values, $strict = false)
+    {
+        return collect($values)->every(function ($value) use ($strict) {
+            if ($value instanceof Model) {
+                return parent::contains(function ($model) use ($value) {
+                    return $model->is($value);
+                });
+            }
+
+            return parent::contains(function ($model) use ($value, $strict) {
+                return $strict ? $model->getKey() === $value : $model->getKey() == $value;
+            });
+        });
+    }
+
+    /**
      * Get the array of primary keys.
      *
      * @return array

@@ -46,6 +46,37 @@ class DatabaseEloquentCollectionTest extends TestCase
         $this->assertFalse($c->contains('id', '>', 2));
     }
 
+    // TODO Move to the bottom
+    public function testContainsAll() {
+        $c = new Collection([['id' => 1], ['id' => 3], ['id' => 5]]);
+
+        $this->assertTrue($c->containsAll([['id' => 1], ['id' => 3]]));
+        $this->assertTrue($c->containsAll([['id' => 1], ['id' => 5]]));
+        $this->assertFalse($c->containsAll([['id' => 1], ['id' => 2]]));
+        $this->assertFalse($c->containsAll([['id' => 1], ['id' => 3], ['id' => 5], ['id' => 7]]));
+
+        $this->assertTrue($c->containsAll([['id' => 1], ['id' => '3']]));
+        // this should fail
+        $this->assertTrue($c->containsAll([['id' => 1], ['id' => '3']], true));
+/*
+        $this->assertTrue($c->containsAll(collect([1, 3])));
+        $this->assertTrue($c->containsAll(collect([1, 5])));
+        $this->assertFalse($c->containsAll(collect([1, 2])));
+        $this->assertFalse($c->containsAll(collect([1, 3, 5, 7])));
+
+        $this->assertTrue($c->containsAll([]));
+        $this->assertTrue($c->containsAll(collect([])));
+        $this->assertTrue($c->containsAll(null));
+
+        $c = new $collection([[1, 3], [3, 5]]);
+
+        $this->assertTrue($c->containsAll([[1, 3]]));
+        $this->assertTrue($c->containsAll([[3, 5]]));
+        $this->assertFalse($c->containsAll([[1, 5]]));
+        $this->assertFalse($c->containsAll([[3]]));
+*/
+    }
+
     public function testContainsIndicatesIfModelInArray()
     {
         $mockModel = m::mock(Model::class);
